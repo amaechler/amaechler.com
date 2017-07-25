@@ -1,0 +1,68 @@
+
+# SEO settings
+title: Andreas Maechler
+description: "Andreas Maechler blog"
+# keywords: ""
+url: https://amaechler.com
+# baseurl: "/simplest"
+# baseurl: null
+
+# Enter your Google Analytics web tracking code (e.g. UA-2110908-2) to activate tracking
+# google_analytics: UA-52446115-1
+
+# repo: http://github.com/nandomoreirame/simplest
+# disqus_shortname: "nandothemes"
+
+# Build settings
+permalink   : /:year/:title/
+markdown    : kramdown
+highlighter : pygments
+
+paginate: 4
+paginate_path: "/page/:num/"
+comments: true
+
+source: src
+destination: _site
+
+# Sass configuration
+sass:
+  sass_dir: assets/scss
+  style: compressed # expanded
+
+# Author settings
+author:
+  name     : Fernando Moreira
+  job      : Frontend Engineer
+  bio      : "Enthusiast performance, responsive design and usability, always looking for the best project and good coffee."
+  thumb    : /images/author.jpg
+  email    : nandomoreira.me@gmail.com
+  url      : http://nandomoreira.me
+  github   : http://github.com/nandomoreirame
+  twitter  : http://twitter.com/nandomoreirame
+  facebook : http://facebook.com/fernando.dev
+  linkedin : http://linkedin.com/in/nandomoreirame
+
+# social settings
+og_locale: "en_CA"
+twitter_card: "summary_large_image"
+twitter_site: "@amaechler"
+
+gems:
+  - bourbon
+  - jekyll-paginate
+
+# navbar pages
+navbar:
+  - slug : about
+    title: About
+  - slug : blog
+    title: Blog
+
+# Exclude these files from your production _site
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - src
+  - CNAME

@@ -1,6 +1,23 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
+    title: 'Andreas Maechler - Blog',
+    author: 'Andreas Maechler',
   },
-  plugins: [`gatsby-plugin-react-helmet`],
-}
+  plugins: [
+    'gatsby-plugin-catch-links',
+    'gatsby-plugin-react-helmet',
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        path: `${__dirname}/src/pages`,
+        name: 'pages'
+      }
+    },
+    {
+      resolve: 'gatsby-transformer-remark',
+      options: {
+        plugins: [] // just in case those previously mentioned remark plugins sound cool :)
+      }
+    }
+  ]
+};

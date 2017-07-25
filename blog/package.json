@@ -1,16 +1,21 @@
 {
-  "name": "gatsby-starter-default",
-  "description": "Gatsby default starter",
+  "name": "amaechler-blog",
+  "description": "Gatsby powered blog",
   "version": "1.0.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Andreas Maechler <amaechler@gmail.com>",
   "dependencies": {
-    "gatsby": "^1.0.1",
-    "gatsby-link": "^1.0.1",
+    "gatsby": "^1.3.2",
+    "gatsby-link": "^1.3.2",
     "gatsby-plugin-catch-links": "^1.0.1",
-    "gatsby-plugin-react-helmet": "^1.0.1"
+    "gatsby-plugin-react-helmet": "^1.0.1",
+    "gatsby-source-filesystem": "^1.0.1",
+    "gatsby-transformer-remark": "^1.1.0"
   },
   "devDependencies": {
-    "gh-pages": "^0.12.0"
+    "eslint": "^4.3.0",
+    "gh-pages": "^1.0.0",
+    "prettier-eslint": "^6.4.2",
+    "prettier-eslint-cli": "^4.1.1"
   },
   "keywords": [
     "gatsby"
@@ -21,7 +26,7 @@
     "build": "gatsby build",
     "deploy": "gatsby build --prefix-paths && gh-pages -d public",
     "develop": "gatsby develop",
-    "format": "prettier --trailing-comma es5 --no-semi --single-quote --write \"pages/*.js\" \"utils/*.js\" \"wrappers/*.js\" \"html.js\"",
+    "format": "prettier-eslint --write \"src/**/*.js\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   }
 }

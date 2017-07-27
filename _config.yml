@@ -1,26 +1,30 @@
 
 # SEO settings
-title: Andreas Maechler
-description: "Andreas Maechler blog"
-# keywords: ""
+title: amaechler
+description: "Sticky Notes To Myself"
 url: https://amaechler.com
-# baseurl: "/simplest"
-# baseurl: null
+# baseurl: "/"
 
 # Enter your Google Analytics web tracking code (e.g. UA-2110908-2) to activate tracking
-# google_analytics: UA-52446115-1
+google_analytics: UA-103141150-1
 
-# repo: http://github.com/nandomoreirame/simplest
-# disqus_shortname: "nandothemes"
+repo: github.com/amaechler/amaechler.github.io
 
 # Build settings
 permalink   : /:year/:title/
-markdown    : kramdown
-highlighter : pygments
+
+# Jekyll 3 now only supports Kramdown for Markdown
+kramdown:
+  # Use GitHub flavored markdown, including triple backtick fenced code blocks
+  input: GFM
+  # Jekyll 3 and GitHub Pages now only support rouge for syntax highlighting
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    # Use existing pygments syntax highlighting css
+    css_class: 'highlight'
 
 paginate: 4
 paginate_path: "/page/:num/"
-comments: true
 
 source: src
 destination: _site
@@ -28,20 +32,18 @@ destination: _site
 # Sass configuration
 sass:
   sass_dir: assets/scss
-  style: compressed # expanded
+  style: :expanded
 
 # Author settings
 author:
-  name     : Fernando Moreira
-  job      : Frontend Engineer
+  name     : Andreas Maechler
+  job      : Software Developer
   bio      : "Enthusiast performance, responsive design and usability, always looking for the best project and good coffee."
-  thumb    : /images/author.jpg
-  email    : nandomoreira.me@gmail.com
-  url      : http://nandomoreira.me
-  github   : http://github.com/nandomoreirame
-  twitter  : http://twitter.com/nandomoreirame
-  facebook : http://facebook.com/fernando.dev
-  linkedin : http://linkedin.com/in/nandomoreirame
+  email    : amaechler.github.io@gmail.com
+  url      : https://amaechler.com
+  github   : https://github.com/amaechler
+  twitter  : https://twitter.com/amaechler
+  linkedin : https://linkedin.com/in/andreasmaechler
 
 # social settings
 og_locale: "en_CA"

@@ -50,7 +50,7 @@ og_locale: "en_CA"
 twitter_card: "summary_large_image"
 twitter_site: "@amaechler"
 
-gems:
+plugins:
   - bourbon
   - jekyll-paginate
 

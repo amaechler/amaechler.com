@@ -12,7 +12,7 @@
   "private": true,
   "scripts": {
     "develop": "gatsby develop",
-    "deploy": "rm -rf public .cache && gatsby build --prefix-paths && gh-pages -d public -b master",
+    "deploy": "rm -rf public .cache && gatsby build && gh-pages -d public",
     "build": "gatsby build"
   }
 }

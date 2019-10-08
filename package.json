@@ -11,8 +11,10 @@
   },
   "private": true,
   "scripts": {
+    "add-domain": "echo \"amaechler.com\" > public/CNAME",
+    "build": "gatsby build && yarn add-domain",
+    "clobber": "rm -rf public .cache",
     "develop": "gatsby develop",
-    "deploy": "rm -rf public .cache && gatsby build && gh-pages -d public && rm -rf public",
-    "build": "gatsby build"
+    "deploy": "yarn clobber && yarn build && gh-pages -d public && yarn clobber"
   }
 }

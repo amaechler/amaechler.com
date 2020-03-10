@@ -7,13 +7,14 @@
     "gatsby-theme-blog": "^1.0.2",
     "gh-pages": "^2.1.1",
     "react": "^16.10.2",
-    "react-dom": "^16.10.2"
+    "react-dom": "^16.10.2",
+    "shx": "^0.3.2"
   },
   "private": true,
   "scripts": {
-    "add-domain": "echo \"amaechler.com\" > public/CNAME",
+    "add-domain": "shx echo \"amaechler.com\" > public/CNAME",
     "build": "gatsby build && yarn add-domain",
-    "clobber": "rm -rf public .cache",
+    "clobber": "shx rm -rf public .cache",
     "develop": "gatsby develop",
     "deploy": "yarn clobber && yarn build && gh-pages -d public && yarn clobber"
   }

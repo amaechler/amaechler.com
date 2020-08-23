@@ -4,11 +4,12 @@
   "author": "Andreas Maechler <amaechler@gmail.com>",
   "devDependencies": {
     "gatsby": "^2.15.29",
-    "gatsby-theme-blog": "^1.0.2",
+    "gatsby-theme-blog": "^2.0.1",
     "gh-pages": "^3.0.0",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
-    "shx": "^0.3.2"
+    "shx": "^0.3.2",
+    "theme-ui": "0.4.0-alpha.3"
   },
   "private": true,
   "scripts": {
@@ -17,5 +18,10 @@
     "clobber": "shx rm -rf public .cache",
     "develop": "gatsby develop",
     "deploy": "yarn clobber && yarn build && gh-pages -d public && yarn clobber"
+  },
+  "resolutions": {
+    "@theme-ui/core": "0.4.0-rc.1",
+    "@theme-ui/css": "0.4.0-rc.1",
+    "@theme-ui/mdx": "0.4.0-rc.1"
   }
 }

@@ -20,6 +20,7 @@ yarn deploy
 ```
 
  `yarn deploy` will
+
 - trigger a clean gatsby build
-- use `gh-pages` the build output to the `gh-pages` branch on GitHub (which is tied to GitHub Pages)
+- use `gh-pages` to commit and push the build output to the `gh-pages` branch on GitHub (which is tied to GitHub Pages)
 - run `yarn clobber` to cleanup

@@ -44,7 +44,7 @@ Update all packages: `sudo apt-get update && sudo apt-get dist-upgrade`.
 ## Setup spotifyd
 
 Following the [wiki](https://github.com/Spotifyd/spotifyd/wiki/Installing-on-a-Raspberry-Pi)
-page, dowload and unpack the latest binary:
+page, download and unpack the latest binary:
 
 ```sh
 mkdir spotifyd
@@ -59,7 +59,7 @@ unzip spotifyd-*.zip -d
 $ wget https://raw.githubusercontent.com/Spotifyd/spotifyd/master/contrib/spotifyd.service
 $ sudo cp spotifyd.service /etc/systemd/system/spotifyd.service
 
-# change the execution directory to the directory created aove
+# change the execution directory to the directory created above
 ExecStart=/home/pi/spotifyd/spotifyd --no-daemon
 
 # change the executing user to pi

@@ -7,5 +7,21 @@
     "files.exclude": {
         "**/_site": true,
         "**/.sass-cache": true
-    }
+    },
+    "cSpell.words": [
+        "alsa",
+        "amaechler",
+        "amixer",
+        "balenaetcher",
+        "hifiberry",
+        "maechler",
+        "raspberrypi",
+        "raspbi",
+        "raspbian",
+        "rstudio",
+        "soundcard",
+        "spotifyd",
+        "ssid",
+        "tidyverse"
+    ]
 }

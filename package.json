@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "author": "Andreas Maechler <amaechler@gmail.com>",
   "devDependencies": {
-    "gatsby": "^2.15.29",
-    "gatsby-theme-blog": "^2.0.1",
+    "gatsby": "^3.0.0",
+    "gatsby-theme-blog": "^3.0.0",
     "gh-pages": "^3.0.0",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "shx": "^0.3.2",
-    "theme-ui": "0.4.0-alpha.3"
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
+    "shx": "^0.3.0",
+    "theme-ui": "^0.8.0"
   },
   "private": true,
   "scripts": {
@@ -18,10 +18,5 @@
     "clobber": "shx rm -rf public .cache",
     "develop": "gatsby develop",
     "deploy": "yarn clobber && yarn build && gh-pages -d public && yarn clobber"
-  },
-  "resolutions": {
-    "@theme-ui/core": "0.4.0-rc.1",
-    "@theme-ui/css": "0.4.0-rc.1",
-    "@theme-ui/mdx": "0.4.0-rc.1"
   }
 }

@@ -11,6 +11,9 @@
 yarn develop
 ```
 
+`develop` runs `gatsby develop` which creates a development build and serves
+that build from a development server.
+
 ## How to deploy
 
 To deploy a new version, run

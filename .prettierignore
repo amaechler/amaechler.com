@@ -1,0 +1,6 @@
+# output and non-source directories
+.*
+!.vscode/
+.cache/
+nuget_modules/
+public/

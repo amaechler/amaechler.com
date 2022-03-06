@@ -17,8 +17,6 @@ $ docker run -d -p 8787:8787 rocker/tidyverse
 
 # Point your browser to `http://localhost:8787/`, login with `rstudio:rstudio` and enjoy
 ```
-<br />
-
 
 ## Setup environment
 
@@ -41,7 +39,6 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 
 $ docker commit 40fed3ecce02 amaechler/ut.711x:v1
 ```
-<br />
 
 ## Run
 
@@ -52,7 +49,6 @@ $ docker run -d -p 8787:8787 -v /Users/amaechler/Documents/Personal/Courses/ut.7
 # To stop the container, run
 $ docker stop rstudio
 ```
-<br />
 
 ## Wiki
 

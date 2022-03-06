@@ -1,27 +1,31 @@
 // Place your settings in this file to overwrite default and user settings.
 {
-    "search.exclude": {
-        "**/_site": true,
-        "**/.sass-cache": true
-    },
-    "files.exclude": {
-        "**/_site": true,
-        "**/.sass-cache": true
-    },
-    "cSpell.words": [
-        "alsa",
-        "amaechler",
-        "amixer",
-        "balenaetcher",
-        "hifiberry",
-        "maechler",
-        "raspberrypi",
-        "raspbi",
-        "raspbian",
-        "rstudio",
-        "soundcard",
-        "spotifyd",
-        "ssid",
-        "tidyverse"
-    ]
+  "search.exclude": {
+    "**/_site": true,
+    "**/.sass-cache": true
+  },
+  "files.exclude": {
+    "**/_site": true,
+    "**/.sass-cache": true
+  },
+  "cSpell.words": [
+    "alsa",
+    "amaechler",
+    "amixer",
+    "andreas",
+    "andreasmaechler",
+    "balenaetcher",
+    "extralife",
+    "hifiberry",
+    "maechler",
+    "noreferrer",
+    "raspberrypi",
+    "raspbi",
+    "raspbian",
+    "rstudio",
+    "soundcard",
+    "spotifyd",
+    "ssid",
+    "tidyverse"
+  ]
 }

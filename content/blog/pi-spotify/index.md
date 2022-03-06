@@ -30,7 +30,7 @@ Create `ssh` and place int the root directory as well to enable ssh.
 To remove the driver for the on-board soundcard and use Hifiberry Digi instead,
 edit `/boot/config.txt`:
 
-```
+```text
 # dtparam=audio=on
 dtoverlay=hifiberry-digi
 ```
@@ -80,7 +80,7 @@ bitrate = 320
 
 ## ALSA issues
 
-http://blog.scphillips.com/posts/2013/01/sound-configuration-on-raspberry-pi-with-alsa/
+<http://blog.scphillips.com/posts/2013/01/sound-configuration-on-raspberry-pi-with-alsa/>
 
 Specifically
 

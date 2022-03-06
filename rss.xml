@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[extralife RSS Feed]]></title><description><![CDATA[extralife RSS Feed]]></description><link>https://amaechler.com</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 06 Mar 2022 23:10:39 GMT</lastBuildDate><item><title><![CDATA[Hifiberry Setup]]></title><description><![CDATA[Notes on how to setup my Raspberry Pi 3b with the Hifiberry Digi+ Standard
+module. Setup Raspbian Buster Download Raspbian Buster Lite or…]]></description><link>https://amaechler.com/pi-spotify/</link><guid isPermaLink="false">https://amaechler.com/pi-spotify/</guid><pubDate>Mon, 14 Oct 2019 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Notes on how to setup my Raspberry Pi 3b with the Hifiberry Digi+ Standard
+module.&lt;/p&gt;
+&lt;h2&gt;Setup Raspbian Buster&lt;/h2&gt;
+&lt;p&gt;Download &lt;a href=&quot;https://www.raspberrypi.org/downloads/raspbian/&quot;&gt;Raspbian Buster Lite&lt;/a&gt; or the latest
+Raspbian lite release. Use &lt;code class=&quot;language-text&quot;&gt;balenaetcher&lt;/code&gt; to copy the image to an SD card.&lt;/p&gt;
+&lt;h3&gt;Headless setup&lt;/h3&gt;
+&lt;p&gt;Create &lt;code class=&quot;language-text&quot;&gt;/boot/wpa_supplicant.conf&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;sh&quot;&gt;&lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;update_config=1
+ctrl_interface=/var/run/wpa_supplicant
+
+network={
+  ssid=&amp;quot;&amp;lt;Name of your WiFi&amp;gt;&amp;quot;
+  psk=&amp;quot;&amp;lt;Password for your WiFi&amp;gt;&amp;quot;
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Create &lt;code class=&quot;language-text&quot;&gt;ssh&lt;/code&gt; and place int the root directory as well to enable ssh.&lt;/p&gt;
+&lt;p&gt;To remove the driver for the on-board soundcard and use Hifiberry Digi instead,
+edit &lt;code class=&quot;language-text&quot;&gt;/boot/config.txt&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;# dtparam=audio=on
+dtoverlay=hifiberry-digi&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Configuration&lt;/h3&gt;
+&lt;p&gt;Boot into the raspberry, connect via ssh. Run &lt;code class=&quot;language-text&quot;&gt;raspbi-config&lt;/code&gt;, set a new root password.&lt;/p&gt;
+&lt;p&gt;Update all packages: &lt;code class=&quot;language-text&quot;&gt;sudo apt-get update &amp;amp;&amp;amp; sudo apt-get dist-upgrade&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;Setup spotifyd&lt;/h2&gt;
+&lt;p&gt;Following the &lt;a href=&quot;https://github.com/Spotifyd/spotifyd/wiki/Installing-on-a-Raspberry-Pi&quot;&gt;wiki&lt;/a&gt;
+page, download and unpack the latest binary:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;sh&quot;&gt;&lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;mkdir spotifyd
+cd spotifyd/
+wget [latest armv6 release]
+unzip spotifyd-*.zip -d&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Configure systemd startup&lt;/h3&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;sh&quot;&gt;&lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;$ wget https://raw.githubusercontent.com/Spotifyd/spotifyd/master/contrib/spotifyd.service
+$ sudo cp spotifyd.service /etc/systemd/system/spotifyd.service
+
+# change the execution directory to the directory created above
+ExecStart=/home/pi/spotifyd/spotifyd --no-daemon
+
+# change the executing user to pi
+User=pi
+
+# ensure the systemd service is started automatically:
+$ systemctl enable spotifyd.service&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Configure spotifyd&lt;/h3&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;sh&quot;&gt;&lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;# A minimal `/etc/spotifyd.conf` configuration file:
+[global]
+device_name = raspberrypi
+bitrate = 320&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;ALSA issues&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;http://blog.scphillips.com/posts/2013/01/sound-configuration-on-raspberry-pi-with-alsa/&quot;&gt;http://blog.scphillips.com/posts/2013/01/sound-configuration-on-raspberry-pi-with-alsa/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Specifically&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;sh&quot;&gt;&lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;pi@raspberrypi:/etc $ amixer controls
+numid=1,iface=MIXER,name=&amp;#39;Tx Source&amp;#39;
+
+pi@raspberrypi:/etc $ amixer cget numid=1
+numid=1,iface=MIXER,name=&amp;#39;Tx Source&amp;#39;
+  ; type=ENUMERATED,access=rw------,values=1,items=2
+  ; Item #0 &amp;#39;S/PDIF RX&amp;#39;
+  ; Item #1 &amp;#39;AIF&amp;#39;
+  : values=0
+
+pi@raspberrypi:/etc $ amixer cset numid=1 50%
+numid=1,iface=MIXER,name=&amp;#39;Tx Source&amp;#39;
+  ; type=ENUMERATED,access=rw------,values=1,items=2
+  ; Item #0 &amp;#39;S/PDIF RX&amp;#39;
+  ; Item #1 &amp;#39;AIF&amp;#39;
+  : values=1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[How to run R and RStudio inside Docker]]></title><description><![CDATA[Setup base image Setup environment In my case, I wanted to setup the R environment as described in the
+UT.7.11x Foundations of Data Analysis…]]></description><link>https://amaechler.com/rstudio/</link><guid isPermaLink="false">https://amaechler.com/rstudio/</guid><pubDate>Thu, 20 Jul 2017 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;Setup base image&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;sh&quot;&gt;&lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;# Make sure you are running against a linux host
+$ docker version
+
+# Pull one of the rocker-org images
+$ docker pull rocker/tidyverse
+
+# Start an RStudio instance accessible in your browser
+$ docker run -d -p 8787:8787 rocker/tidyverse
+
+# Point your browser to `http://localhost:8787/`, login with `rstudio:rstudio` and enjoy&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Setup environment&lt;/h2&gt;
+&lt;p&gt;In my case, I wanted to setup the R environment as described in the
+&lt;em&gt;UT.7.11x Foundations of Data Analysis - Part 1&lt;/em&gt; course.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;sh&quot;&gt;&lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;# Download the SDSFoundations package to your local hard drive, in my case `/Users/amaechler/Downloads`
+
+# Run your docker container
+$ docker run -d -p 8787:8787 -v /Users/amaechler/Downloads:/downloads-e ROOT=TRUE rocker/tidyverse
+
+# Install the package in R
+install.packages(&amp;quot;/downloads/SDSFoundations_1.4.tar.gz&amp;quot;, repos = NULL, type = &amp;quot;source&amp;quot;)
+
+# Commit the changed container
+$ docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS              PORTS                    NAMES
+40fed3ecce02        rocker/tidyverse    &amp;quot;/init&amp;quot;             About a minute ago   Up About a minute   0.0.0.0:8787-&amp;gt;8787/tcp   cranky_kirch
+
+$ docker commit 40fed3ecce02 amaechler/ut.711x:v1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Run&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;sh&quot;&gt;&lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;# Now start your newly committed container:
+$ docker run -d -p 8787:8787 -v /Users/amaechler/Documents/Personal/Courses/ut.7.11x_data_analysis:/home/rstudio/ut.711x --name rstudio  amaechler/ut.711x:v1
+
+# To stop the container, run
+$ docker stop rstudio&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Wiki&lt;/h2&gt;
+&lt;p&gt;More details are available on the &lt;a href=&quot;https://github.com/rocker-org/rocker/wiki/Using-the-RStudio-image&quot;&gt;rocker-org wiki&lt;/a&gt;.&lt;/p&gt;</content:encoded></item></channel></rss>

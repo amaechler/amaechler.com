@@ -6,12 +6,12 @@
   "author": "Andreas Maechler <amaechler@gmail.com>",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && shx echo 'amaechler.com' > dist/CNAME",
     "preview": "astro preview",
+    "deploy": "astro build && shx echo 'amaechler.com' > dist/CNAME && gh-pages -d dist",
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.7.3",
     "@fontsource/merriweather": "^5.2.11",
     "@fontsource/montserrat": "^5.2.8",

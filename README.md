@@ -1,29 +1,39 @@
-# amaechler.com
+# extralife (amaechler.com)
 
-- Blog using [Gatsby](https://www.gatsbyjs.org/)
-- Hosted on Github Pages, deployed using [`gh-pages`](https://github.com/tschaub/gh-pages)
+Personal blog built with [Astro](https://astro.build/). Site title is "extralife".
+
+- Hosted on GitHub Pages, deployed using [`gh-pages`](https://github.com/tschaub/gh-pages)
 - Domain registered at [GoDaddy](https://ca.godaddy.com/)
 - DNS pointing to [Cloudflare](https://www.cloudflare.com) CDN
 
-## How to develop
+## Structure
+
+- Blog content: `src/content/blog/<slug>.md`
+- Templates: `src/pages/` (file-based routing)
+- Global styles: `src/styles/global.css`
+
+## Development
 
 ```sh
-yarn develop
+pnpm dev            # Astro dev server with hot reload
+pnpm build          # production build (includes CNAME for custom domain)
+pnpm preview        # serve production build locally
 ```
 
-`develop` runs `gatsby develop` which creates a development build and serves
-that build from a development server.
+## Adding a blog post
 
-## How to deploy
+Create a new markdown file in `src/content/blog/`. Frontmatter must include `title` and `date`.
 
-To deploy a new version, run
+```
+src/content/blog/my-new-post.md
+```
+
+## Deployment
+
+To deploy a new version:
 
 ```sh
-yarn deploy
+pnpm deploy
 ```
 
- `yarn deploy` will
-
-- trigger a clean gatsby build
-- use `gh-pages` to commit and push the build output to the `gh-pages` branch on GitHub (which is tied to GitHub Pages)
-- run `yarn clobber` to clean up
+This runs `astro build && shx echo 'amaechler.com' > dist/CNAME && gh-pages -d dist` — building with CNAME and pushing to the `gh-pages` branch.

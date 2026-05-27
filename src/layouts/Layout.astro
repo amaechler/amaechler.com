@@ -1,0 +1,74 @@
+---
+import { site } from '../data/siteMetadata';
+
+const { title, author, social } = site;
+const { pathname } = Astro.url;
+const isRootPath = pathname === '/';
+
+interface Props {
+  title: string;
+}
+
+const { title: pageTitle } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>
+      {isRootPath ? title : `${pageTitle} | ${title}`}
+    </title>
+
+    <meta name="description" content={author.summary} />
+
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={author.summary} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.site ?? '' + Astro.url.pathname} />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:creator" content={social.twitter} />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={author.summary} />
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <style is:global>
+      {`
+        @font-face {
+          font-family: 'Montserrat';
+          font-style: normal;
+          font-weight: 100 900;
+          src: url(/_fontsource/montserrat/index.min.css);
+        }
+      `}
+    </style>
+  </head>
+  <body>
+    <div class="global-wrapper" data-is-root-path={isRootPath.toString()}>
+      <header class="global-header">
+        {isRootPath
+          ? <h1 class="main-heading"><a href="/">{title}</a></h1>
+          : <a class="header-link-home" href="/">{title}</a>
+        }
+      </header>
+      <main>
+        <slot />
+      </main>
+      <footer>
+        {"\u00A9"} {new Date().getFullYear()}
+        {' | '}
+        <a href={`https://linkedin.com/in/${social.linkedin}`} target="_blank" rel="noreferrer">
+          Linkedin
+        </a>
+        {' | '}
+        <a href={`https://github.com/${social.github}`} target="_blank" rel="noreferrer">
+          GitHub
+        </a>
+      </footer>
+    </div>
+  </body>
+</html>

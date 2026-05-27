@@ -1,0 +1,38 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Bio from '../components/Bio.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog', ({ data }) => data)
+  .then(p => p.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()));
+
+---
+<Layout title="All posts">
+  <Bio />
+  {posts.length === 0
+    ? <p>No blog posts found. Add markdown posts to "content/blog".</p>
+    : <ol style="list-style: none;">
+        {posts.map(post => (
+          <li key={post.id}>
+            <article class="post-list-item" itemScope itemType="http://schema.org/Article">
+              <header>
+                <h2>
+                  <a href={`/${post.id.replace(/^blog\//, '')}`} itemProp="url">
+                    <span itemProp="headline">{post.data.title}</span>
+                  </a>
+                </h2>
+                <small>
+                  {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric' }).format(post.data.date)}
+                </small>
+              </header>
+              <section>
+                <p itemProp="description">
+                  {post.data.description ?? ''}
+                </p>
+              </section>
+            </article>
+          </li>
+        ))}
+      </ol>
+  }
+</Layout>

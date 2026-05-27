@@ -1,0 +1,18 @@
+---
+import { site } from '../data/siteMetadata';
+const { author } = site;
+---
+<div class="bio">
+  <img
+    class="bio-avatar"
+    src="/images/profile-pic.png"
+    alt="Profile picture"
+    width="50"
+    height="50"
+  />
+  {author.name && (
+    <p>
+      Words by <strong>{author.name}</strong> {author.summary || null}
+    </p>
+  )}
+</div>

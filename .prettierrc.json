@@ -1,4 +1,5 @@
 {
+  "plugins": ["prettier-plugin-astro"],
   "arrowParens": "avoid",
   "endOfLine": "auto",
   "printWidth": 120,
@@ -7,7 +8,11 @@
   "trailingComma": "none",
   "overrides": [
     {
-      "files": ["*.json", "*.jsonc", "*.json5", "*.yml"],
+      "files": "*.astro",
+      "options": { "parser": "astro" }
+    },
+    {
+      "files": ["*.json", "*.jsonc", "*.json5", "*.yml", "*.yaml"],
       "options": { "tabWidth": 2 }
     }
   ]

@@ -1,0 +1,9 @@
+pre-commit:
+  parallel: true
+  jobs:
+    - name: format
+      run: mise exec -- pnpm exec prettier --write {staged_files}
+      glob: "*.{astro,ts,js,json,css,md}"
+      stage_fixed: true
+    - name: check
+      run: mise exec -- pnpm check

@@ -4,12 +4,19 @@
   "version": "1.0.0",
   "description": "Personal blog powered by Astro and Markdown",
   "author": "Andreas Maechler <amaechler@gmail.com>",
+  "packageManager": "pnpm@11.0.7",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && shx echo 'amaechler.com' > dist/CNAME",
+    "build": "astro check && astro build && shx echo 'amaechler.com' > dist/CNAME",
+    "check": "astro check",
+    "lint": "astro check",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "preview": "astro preview",
-    "deploy": "astro build && shx echo 'amaechler.com' > dist/CNAME && gh-pages -d dist",
-    "astro": "astro"
+    "validate": "pnpm format:check && pnpm build",
+    "deploy": "pnpm build && gh-pages -d dist",
+    "astro": "astro",
+    "prepare": "lefthook install"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.18",
@@ -23,10 +30,13 @@
     "shx": "^0.4.0"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "lefthook": "^2.1.8",
     "prettier": "^3.8.3",
-    "prettier-plugin-astro": "^0.14.1"
+    "prettier-plugin-astro": "^0.14.1",
+    "typescript": "^6.0.3"
   },
   "engines": {
-    "node": ">=22.12.0"
+    "node": ">=24.15.0 <25"
   }
 }

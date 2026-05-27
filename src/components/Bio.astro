@@ -1,14 +1,15 @@
 ---
 import { site } from '../data/siteMetadata';
+import profilePic from '../assets/profile-pic.png';
 const { author } = site;
 ---
 <div class="bio">
   <img
     class="bio-avatar"
-    src="/images/profile-pic.png"
+    src={profilePic.src}
+    width={profilePic.width}
+    height={profilePic.height}
     alt="Profile picture"
-    width="50"
-    height="50"
   />
   {author.name && (
     <p>

@@ -1,5 +1,6 @@
 ---
 import { site } from '../data/siteMetadata';
+import '../styles/global.css';
 
 const { title, author, social } = site;
 const { pathname } = Astro.url;
@@ -35,7 +36,6 @@ const { title: pageTitle } = Astro.props;
     <meta name="twitter:description" content={author.summary} />
 
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&family=Merriweather:wght@400;700&display=swap" rel="stylesheet" />
   </head>
   <body>
     <div class="global-wrapper" data-is-root-path={isRootPath.toString()}>

@@ -1,0 +1,70 @@
+---
+import Bio from "../../components/Bio.astro";
+import Layout from "../../layouts/Layout.astro";
+import { getCollection, render, type CollectionEntry } from "astro:content";
+
+interface Props {
+    post: CollectionEntry<"blog">;
+}
+
+export async function getStaticPaths() {
+    const posts = await getCollection("blog");
+
+    return posts.map(post => ({
+        params: { slug: post.id },
+        props: { post }
+    }));
+}
+
+const { post } = Astro.props as Props;
+const { Content } = await render(post);
+
+const posts = (await getCollection("blog")).sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf());
+const currentIndex = posts.findIndex(entry => entry.id === post.id);
+const previousPost = currentIndex > 0 ? posts[currentIndex - 1] : null;
+const nextPost = currentIndex >= 0 && currentIndex < posts.length - 1 ? posts[currentIndex + 1] : null;
+
+const dateFormatted = new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+}).format(post.data.date);
+---
+
+<Layout title={post.data.title}>
+    <article class="blog-post" itemscope itemtype="http://schema.org/Article">
+        <header>
+            <h1 itemprop="headline">{post.data.title}</h1>
+            <p>{dateFormatted}</p>
+        </header>
+        <section itemprop="articleBody">
+            <Content />
+        </section>
+        <hr />
+        <footer>
+            <Bio />
+        </footer>
+    </article>
+    <nav class="blog-post-nav">
+        <ul style="display: flex; flex-wrap: wrap; justify-content: space-between; list-style: none; padding: 0;">
+            <li>
+                {
+                    previousPost && (
+                        <a href={`/blog/${previousPost.id}/`} rel="prev">
+                            &larr; {previousPost.data.title}
+                        </a>
+                    )
+                }
+            </li>
+            <li>
+                {
+                    nextPost && (
+                        <a href={`/blog/${nextPost.id}/`} rel="next">
+                            {nextPost.data.title} &rarr;
+                        </a>
+                    )
+                }
+            </li>
+        </ul>
+    </nav>
+</Layout>

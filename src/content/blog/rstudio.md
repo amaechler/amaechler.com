@@ -1,6 +1,7 @@
 ---
 title: How to run R and RStudio inside Docker
-date: 2017-07-20
+description: A guide to running R and RStudio in Docker using the rocker/tidyverse image, with environment setup and container management.
+date: "2017-07-20"
 ---
 
 ## Setup base image

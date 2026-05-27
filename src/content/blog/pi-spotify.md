@@ -1,6 +1,7 @@
 ---
 title: Hifiberry Setup
-date: 2019-10-14
+description: Notes on setting up a Raspberry Pi 3b with the Hifiberry Digi+ Standard module, including headless setup, Spotifyd configuration, and ALSA troubleshooting.
+date: "2019-10-14"
 ---
 
 Notes on how to setup my Raspberry Pi 3b with the Hifiberry Digi+ Standard

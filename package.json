@@ -9,7 +9,6 @@
     "dev": "astro dev",
     "build": "astro check && astro build",
     "check": "astro check",
-    "lint": "astro check",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "preview": "astro preview",

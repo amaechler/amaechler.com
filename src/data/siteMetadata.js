@@ -9,7 +9,6 @@ export const site = {
     author: { name: "Andreas Maechler", summary: "who lives and works in Calgary." },
     social: {
         github: "amaechler",
-        linkedin: "andreasmaechler",
-        twitter: "amaechler"
+        linkedin: "andreasmaechler"
     }
 };

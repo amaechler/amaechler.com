@@ -2,7 +2,7 @@
 
 Personal blog built with [Astro](https://astro.build/). Site title is "extralife".
 
-- Hosted on GitHub Pages, deployed using [`gh-pages`](https://github.com/tschaub/gh-pages)
+- Hosted on GitHub Pages, auto-deployed via GitHub Actions on push to `master`
 - Domain registered at [GoDaddy](https://ca.godaddy.com/)
 - DNS pointing to [Cloudflare](https://www.cloudflare.com) CDN
 
@@ -30,10 +30,10 @@ src/content/blog/my-new-post.md
 
 ## Deployment
 
-To deploy a new version:
+The site auto-deploys on every push to `master` via GitHub Actions. To deploy manually:
 
 ```sh
-pnpm deploy
+gh workflow run gh-pages.yml
 ```
 
-This runs `astro build && shx echo 'amaechler.com' > dist/CNAME && gh-pages -d dist` — building with CNAME and pushing to the `gh-pages` branch.
+This requires appropriate repository permissions for workflow dispatch.

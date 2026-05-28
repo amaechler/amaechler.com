@@ -2,7 +2,7 @@
 
 Personal blog built with [Astro](https://astro.build/). Site title is "extralife".
 
-- Hosted on GitHub Pages, auto-deployed via GitHub Actions on push to `master`
+- Hosted on GitHub Pages, auto-deployed via GitHub Actions on push to `main`
 - Domain registered at [GoDaddy](https://ca.godaddy.com/)
 - DNS pointing to [Cloudflare](https://www.cloudflare.com) CDN
 
@@ -30,7 +30,7 @@ src/content/blog/my-new-post.md
 
 ## Deployment
 
-The site auto-deploys on every push to `master` via GitHub Actions (using the native GitHub Pages deployment).
+The site auto-deploys on every push to `main` via GitHub Actions (using the native GitHub Pages deployment).
 
 ### Setup Required on GitHub
 

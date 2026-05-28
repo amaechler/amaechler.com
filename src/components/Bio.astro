@@ -1,11 +1,12 @@
 ---
 import { site } from "../data/siteMetadata";
+import { Image } from "astro:assets";
 import profilePic from "../assets/profile-pic.png";
 const { author } = site;
 ---
 
 <div class="bio">
-    <img class="bio-avatar" src={profilePic.src} width="50" height="50" alt="Profile picture" />
+    <Image class="bio-avatar" src={profilePic} width={50} height={50} alt="Profile picture" />
     {
         author.name && (
             <p>

@@ -11,9 +11,11 @@ const rssUrl = new URL("/rss.xml", siteBase).href;
 
 interface Props {
     title: string;
+    description?: string;
 }
 
-const { title: pageTitle } = Astro.props as Props;
+const { title: pageTitle, description } = Astro.props as Props;
+const metaDescription = description || site.description || author.summary;
 ---
 
 <!doctype html>
@@ -27,17 +29,17 @@ const { title: pageTitle } = Astro.props as Props;
             {isRootPath ? title : `${pageTitle} | ${title}`}
         </title>
 
-        <meta name="description" content={author.summary} />
+        <meta name="description" content={metaDescription} />
 
         <meta property="og:title" content={pageTitle} />
-        <meta property="og:description" content={author.summary} />
+        <meta property="og:description" content={metaDescription} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonicalUrl} />
 
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:creator" content={social.twitter} />
         <meta name="twitter:title" content={pageTitle} />
-        <meta name="twitter:description" content={author.summary} />
+        <meta name="twitter:description" content={metaDescription} />
 
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="alternate" type="application/rss+xml" title={title} href={rssUrl} />
@@ -63,9 +65,11 @@ const { title: pageTitle } = Astro.props as Props;
             <footer>
                 © {new Date().getFullYear()}
                 {" | "}
-                <a href={`https://linkedin.com/in/${social.linkedin}`} target="_blank" rel="noreferrer"> Linkedin </a>
+                <a href={`https://linkedin.com/in/${social.linkedin}`} target="_blank" rel="noopener noreferrer">
+                    Linkedin
+                </a>
                 {" | "}
-                <a href={`https://github.com/${social.github}`} target="_blank" rel="noreferrer"> GitHub </a>
+                <a href={`https://github.com/${social.github}`} target="_blank" rel="noopener noreferrer"> GitHub </a>
             </footer>
         </div>
     </body>

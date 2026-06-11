@@ -1,41 +1,37 @@
 ---
 import Bio from "../../components/Bio.astro";
 import Layout from "../../layouts/Layout.astro";
-import { getCollection, render, type CollectionEntry } from "astro:content";
+import { render, type CollectionEntry } from "astro:content";
+import { formatPostDate, getSortedPosts } from "../../lib/posts";
 
 interface Props {
     post: CollectionEntry<"blog">;
+    previousPost: CollectionEntry<"blog"> | null;
+    nextPost: CollectionEntry<"blog"> | null;
 }
 
 export async function getStaticPaths() {
-    const posts = await getCollection("blog");
+    const posts = await getSortedPosts();
 
-    return posts.map(post => ({
+    return posts.map((post, index) => ({
         params: { slug: post.id },
-        props: { post }
+        props: {
+            post,
+            previousPost: posts[index + 1] ?? null,
+            nextPost: posts[index - 1] ?? null
+        }
     }));
 }
 
-const { post } = Astro.props as Props;
+const { post, previousPost, nextPost } = Astro.props;
 const { Content } = await render(post);
-
-const posts = (await getCollection("blog")).sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf());
-const currentIndex = posts.findIndex(entry => entry.id === post.id);
-const previousPost = currentIndex > 0 ? posts[currentIndex - 1] : null;
-const nextPost = currentIndex >= 0 && currentIndex < posts.length - 1 ? posts[currentIndex + 1] : null;
-
-const dateFormatted = new Intl.DateTimeFormat("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric"
-}).format(post.data.date);
 ---
 
 <Layout title={post.data.title} description={post.data.description}>
-    <article class="blog-post" itemscope itemtype="http://schema.org/Article">
+    <article class="blog-post" itemscope itemtype="https://schema.org/Article">
         <header>
             <h1 itemprop="headline">{post.data.title}</h1>
-            <p>{dateFormatted}</p>
+            <p>{formatPostDate(post.data.date)}</p>
         </header>
         <section itemprop="articleBody">
             <Content />
@@ -46,7 +42,7 @@ const dateFormatted = new Intl.DateTimeFormat("en-US", {
         </footer>
     </article>
     <nav class="blog-post-nav">
-        <ul style="display: flex; flex-wrap: wrap; justify-content: space-between; list-style: none; padding: 0;">
+        <ul>
             <li>
                 {
                     previousPost && (

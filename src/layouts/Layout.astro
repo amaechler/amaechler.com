@@ -2,20 +2,20 @@
 import { site } from "../data/siteMetadata";
 import "../styles/global.css";
 
-const { title, author, social } = site;
-const { pathname } = Astro.url;
-const isRootPath = pathname === "/";
-const siteBase = Astro.site ?? Astro.url.origin;
-const canonicalUrl = new URL(pathname, siteBase).href;
-const rssUrl = new URL("/rss.xml", siteBase).href;
-
 interface Props {
     title: string;
     description?: string;
 }
 
-const { title: pageTitle, description } = Astro.props as Props;
-const metaDescription = description || site.description || author.summary;
+const { title, social } = site;
+const { pathname } = Astro.url;
+const isRootPath = pathname === "/";
+const canonicalUrl = new URL(pathname, site.siteUrl).href;
+const rssUrl = new URL("/rss.xml", site.siteUrl).href;
+const ogType = pathname.startsWith("/blog/") ? "article" : "website";
+
+const { title: pageTitle, description } = Astro.props;
+const metaDescription = description || site.description;
 ---
 
 <!doctype html>
@@ -33,9 +33,10 @@ const metaDescription = description || site.description || author.summary;
 
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={metaDescription} />
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content={ogType} />
         <meta property="og:url" content={canonicalUrl} />
 
+        <link rel="canonical" href={canonicalUrl} />
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="alternate" type="application/rss+xml" title={title} href={rssUrl} />
     </head>
@@ -61,7 +62,7 @@ const metaDescription = description || site.description || author.summary;
                 © {new Date().getFullYear()}
                 {" | "}
                 <a href={`https://linkedin.com/in/${social.linkedin}`} target="_blank" rel="noopener noreferrer">
-                    Linkedin
+                    LinkedIn
                 </a>
                 {" | "}
                 <a href={`https://github.com/${social.github}`} target="_blank" rel="noopener noreferrer"> GitHub </a>

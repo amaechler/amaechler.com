@@ -11,7 +11,7 @@ export default defineConfig({
     site: site.siteUrl,
     integrations: [sitemap()],
     markdown: {
-        shikiConfig: { theme: "github-light" },
+        shikiConfig: { theme: "one-light" },
         remarkPlugins: [smartypants]
     }
 });

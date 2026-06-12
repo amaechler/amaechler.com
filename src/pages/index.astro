@@ -1,30 +1,28 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Bio from "../components/Bio.astro";
-import { getCollection } from "astro:content";
+import { formatPostDate, getSortedPosts } from "../lib/posts";
 
-const posts = (await getCollection("blog")).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-
-const dateFormatter = new Intl.DateTimeFormat("en-US", { year: "numeric", month: "long", day: "numeric" });
+const posts = await getSortedPosts();
 ---
 
 <Layout title="All posts">
     <Bio />
     {
         posts.length === 0 ? (
-            <p>No blog posts found. Add markdown posts to "content/blog".</p>
+            <p>No blog posts found. Add markdown posts to "src/content/blog".</p>
         ) : (
-            <ol style="list-style: none;">
+            <ol class="post-list">
                 {posts.map(post => (
                     <li>
-                        <article class="post-list-item" itemscope itemtype="http://schema.org/Article">
+                        <article class="post-list-item" itemscope itemtype="https://schema.org/Article">
                             <header>
                                 <h2>
                                     <a href={`/blog/${post.id}/`} itemprop="url">
                                         <span itemprop="headline">{post.data.title}</span>
                                     </a>
                                 </h2>
-                                <small>{dateFormatter.format(post.data.date)}</small>
+                                <small>{formatPostDate(post.data.date)}</small>
                             </header>
                             <section>
                                 <p itemprop="description">{post.data.description ?? ""}</p>

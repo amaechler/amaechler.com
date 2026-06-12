@@ -3,6 +3,8 @@ name: GitHub Pages
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -10,11 +12,34 @@ permissions:
   pages: write
   id-token: write
 
+# Allow only one concurrent deployment per ref. Cancel superseded PR builds,
+# but never cancel an in-progress production deployment.
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6.0.3
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Check formatting
+        run: pnpm format:check
+
   build:
     runs-on: ubuntu-latest
     steps:
@@ -27,7 +52,8 @@ jobs:
           node-version: 24
 
   deploy:
-    needs: build
+    if: github.event_name != 'pull_request'
+    needs: [build, format]
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -36,5 +62,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
-
-

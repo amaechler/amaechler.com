@@ -1,10 +1,7 @@
-/**
- * Site configuration used across the application.
- * Extracted from the original gatsby-config.js siteMetadata.
- */
+/** Site configuration used across the application. */
 export const site = {
     title: "extralife",
-    description: "who lives and works in Calgary.",
+    description: "Personal blog of Andreas Maechler, who lives and works in Calgary.",
     siteUrl: "https://amaechler.com/",
     author: { name: "Andreas Maechler", summary: "who lives and works in Calgary." },
     social: {

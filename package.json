@@ -17,13 +17,13 @@
     "prepare": "lefthook install"
   },
   "dependencies": {
+    "@astrojs/markdown-satteri": "^0.3.1",
     "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.7.3",
     "@fontsource/merriweather": "^5.2.11",
     "@fontsource/montserrat": "^5.2.8",
-    "astro": "^6.4.5",
-    "normalize.css": "^8.0.1",
-    "remark-smartypants": "^3.0.2"
+    "astro": "^7.0.0",
+    "normalize.css": "^8.0.1"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",

@@ -1,17 +1,18 @@
 // @ts-check
 import { defineConfig } from "astro/config";
+import { satteri } from "@astrojs/markdown-satteri";
 import sitemap from "@astrojs/sitemap";
-import remarkSmartypants from "remark-smartypants";
 import { site } from "./src/data/siteMetadata";
-
-const smartypants = /** @type {any} */ (remarkSmartypants);
 
 // https://astro.build/config
 export default defineConfig({
     site: site.siteUrl,
     integrations: [sitemap()],
     markdown: {
-        shikiConfig: { theme: "one-light" },
-        remarkPlugins: [smartypants]
+        // Astro 7 ships Sätteri as the default Markdown processor. Its built-in
+        // smart punctuation replaces remark-smartypants; shikiConfig still drives
+        // syntax highlighting.
+        processor: satteri({ features: { smartPunctuation: true } }),
+        shikiConfig: { theme: "one-light" }
     }
 });

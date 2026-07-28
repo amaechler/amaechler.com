@@ -21,3 +21,8 @@ updates:
       npm-dependencies:
         patterns:
           - "*"
+    ignore:
+      # TypeScript 7's native (Go-based) compiler doesn't yet expose the
+      # programmatic API astro check relies on: https://github.com/withastro/roadmap/discussions/1321
+      - dependency-name: "typescript"
+        versions: [">=7.0.0"]

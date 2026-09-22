@@ -44,22 +44,18 @@ const { Content } = await render(post);
     <nav class="blog-post-nav">
         <ul>
             <li>
-                {
-                    previousPost && (
-                        <a href={`/blog/${previousPost.id}/`} rel="prev">
-                            &larr; {previousPost.data.title}
-                        </a>
-                    )
-                }
+                {previousPost && (
+                    <a href={`/blog/${previousPost.id}/`} rel="prev">
+                        &larr; {previousPost.data.title}
+                    </a>
+                )}
             </li>
             <li>
-                {
-                    nextPost && (
-                        <a href={`/blog/${nextPost.id}/`} rel="next">
-                            {nextPost.data.title} &rarr;
-                        </a>
-                    )
-                }
+                {nextPost && (
+                    <a href={`/blog/${nextPost.id}/`} rel="next">
+                        {nextPost.data.title} &rarr;
+                    </a>
+                )}
             </li>
         </ul>
     </nav>

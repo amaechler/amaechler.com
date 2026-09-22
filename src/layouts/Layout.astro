@@ -43,17 +43,15 @@ const metaDescription = description || site.description;
     <body>
         <div class="global-wrapper" data-is-root-path={isRootPath.toString()}>
             <header class="global-header">
-                {
-                    isRootPath ? (
-                        <h1 class="main-heading">
-                            <a href="/">{title}</a>
-                        </h1>
-                    ) : (
-                        <a class="header-link-home" href="/">
-                            {title}
-                        </a>
-                    )
-                }
+                {isRootPath ? (
+                    <h1 class="main-heading">
+                        <a href="/">{title}</a>
+                    </h1>
+                ) : (
+                    <a class="header-link-home" href="/">
+                        {title}
+                    </a>
+                )}
             </header>
             <main>
                 <slot />
@@ -65,7 +63,10 @@ const metaDescription = description || site.description;
                     LinkedIn
                 </a>
                 {" | "}
-                <a href={`https://github.com/${social.github}`} target="_blank" rel="noopener noreferrer"> GitHub </a>
+                <a href={`https://github.com/${social.github}`} target="_blank" rel="noopener noreferrer">
+                    {" "}
+                    GitHub{" "}
+                </a>
             </footer>
         </div>
     </body>

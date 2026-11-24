@@ -1,10 +1,8 @@
 # output and non-source directories
 .*
 !.vscode/
-.cache/
 dist/
 node_modules/
 .pnpm-store/
-nuget_modules/
 public/
 pnpm-lock.yaml

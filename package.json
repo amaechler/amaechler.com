@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "Personal blog powered by Astro and Markdown",
   "author": "Andreas Maechler <amaechler@gmail.com>",
-  "packageManager": "pnpm@11.0.7",
+  "packageManager": "pnpm@12.23.0",
   "scripts": {
     "dev": "astro dev",
     "build": "astro check && astro build",
@@ -34,6 +34,6 @@
     "typescript": "^6.0.3"
   },
   "engines": {
-    "node": ">=24.15.0 <25"
+    "node": ">=26 <27"
   }
 }
